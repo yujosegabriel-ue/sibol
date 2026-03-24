@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sibol Workshops Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-cream: #f4ece6; /* Main background color */
+            --header-green: #0a2417; /* Title color */
+            --card-dark: #0e241b; /* Card background color */
+            --filter-bg: #0d2118; /* Dropdown background */
+            --text-white: #ffffff;
+            --text-muted: #bdc3c7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-cream);
+            padding: 40px ; /* Page margins */
+            min-height: 100vh;
+        }
+
+        /* --- HEADER SECTION --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        h1 {
+            font-family: 'Playfair Display', serif;
+            color: var(--header-green);
+            font-size: 52px;
+            font-weight: 700;
+            color: #004822;
+        }
+
+        /* --- FILTERS SECTION --- */
+        .filter-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        select {
+            background-color: var(--filter-bg);
+            color: var(--text-white);
+            border: none;
+            padding: 12px 24px;
+            padding-right: 45px; /* Space for the chevron icon */
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            min-width: 180px;
+            
+            /* Customizing the dropdown arrow to match your icon */
+            appearance: none;
+            -webkit-appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23bdc3c7' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 18px center;
+            background-size: 18px;
+            transition: background-color 0.2s ease;
+        }
+
+        select:hover {
+            background-color: #142e22;
+        }
+
+        /* --- WORKSHOP GRID --- */
+        .workshop-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 columns as per design */
+            gap: 25px;
+            margin-left: 5vh;
+        }
+
+        /* --- CARD STYLING --- */
+        .workshop-card {
+            background-color: var(--card-dark);
+            border-radius: 25px; /* Rounded corners */
+            overflow: hidden;
+            text-align: center;
+            /* Shadow effect for depth */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .workshop-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .card-img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 22px;
+            color: var(--text-white);
+        }
+
+        .card-body h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .card-body p {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic; /* Italic description */
+            line-height: 1.5;
+        }
+
+        /* Responsive scaling for different screen sizes */
+        @media (max-width: 1100px) {
+            .workshop-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 700px) {
+            .workshop-grid { grid-template-columns: 1fr; }
+            header { flex-direction: column; align-items: flex-start; gap: 20px; }
+        }
+
+
+
+
+
+    .main-sidebar{
+        position: fixed;
+        top: 45px;
+        margin-top: 30px;
+        margin-left: -30px;
+        width: 60px;
+        height: 90vh;
+        float: left;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, #0F2419, #1c3a2b);
+        border-radius: 15px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        transition: width 0.4s ease;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .main-sidebar:hover {
+        width: 220px;
+    }
+
+    .main-sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .main-sidebar li {
+        height: 60px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        position: relative;
+    }
+
+    .main-sidebar a {
+        margin-left: 2px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+        height: 100%;
+        transition: background 0.3s;
+    }
+
+    .main-sidebar a:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .main-sidebar img {
+        width: 50px; 
+        height: 50px; 
+        margin-left: 3px;
+        object-fit: contain;
+        display: block;
+        border-radius: 10px;
+        flex-shrink: 0; 
+    }
+
+    .main-sidebar span {
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.3s ease, margin-left 0.3s ease;
+        margin-left: 15px;
+    }
+
+    .main-sidebar:hover a span {
+        opacity: 1;
+        margin-left: 15px;
+    }
+
+    .sidebar-logo {
+        display: flex;
+        align-items: center; 
+        justify-content: flex-start; 
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        gap: 15px;
+        padding: 15px 6px;
+    }
+
+    .sidebar-logo img {
+        width: 42px;
+        height: 42px;
+        object-fit: cover;
+    }
+
+    .sidebar-logo h2 {
+        font-size: 16px;
+        color: #fff;
+        margin: 0;
+    }
+
+    .sidebar-logout {
+        margin-top: 270px;
+        padding: 20px 0px;
+    }
+
+    .sidebar-logout a {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .sidebar-user {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        gap: 10px;
+        height: 80px; 
+        overflow: hidden;
+        text-decoration: none; 
+        transition: all 0.3s;
+        color: #fff; 
+    }
+
+    .sidebar-user:hover {
+        background: rgba(255,255,255,0.2); 
+    }
+
+    .sidebar-user .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .sidebar-user .user-info {
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .main-sidebar:hover .sidebar-user .user-info {
+        opacity: 1;
+    }
+
+    .user-name, .user-role {
+        color: #fff;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+    </style>
+</head>
+<body>
+     <nav class="main-sidebar">
+    <div class="sidebar-logo">
+        <img src="sidebar-icons/logo.png" alt="System Logo">
+        <h2>SIBOL</h2>
+    </div>
+
+    <a href="user-profile.html" class="sidebar-user">
+        <img src="sidebar-icons/profile.png" alt="User Profile" class="user-avatar">
+        <div class="user-info">
+            <span class="user-name">Gabriella Marie</span>
+            <span class="user-role">Student</span>
+        </div>
+    </a>
+
+    <ul>
+        <li>
+            <a href="index.html">
+                <img src="sidebar-icons/home.png" alt="">
+                <span>Home</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="growth.html">
+                <img src="sidebar-icons/skill-path.png" alt="">
+                <span>My Growth</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="workshop.html">
+                <img src="sidebar-icons/workshop.png" alt="">
+                <span>Workshops</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="skillpath.html">
+                <img src="sidebar-icons/library.png" alt="">
+                <span>Skill Path Library</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="messages.html">
+                <img src="sidebar-icons/message.png" alt="">
+                <span>Messages</span>
+            </a>
+        </li>
+
+        <div class="sidebar-logout">
+            <a href="login.html">
+                <img src="sidebar-icons/logout.png" alt="">
+                <span>Logout</span>
+            </a>
+        </div>
+    </ul>
+</nav>
+
+    <header>
+        <h1>Workshops</h1>
+        <div class="filter-group">
+            <select><option>Select Path</option></select>
+            <select><option>Select Type</option></select>
+        </div>
+    </header>
+
+    <div class="workshop-grid">
+
+
+        
+        <div class="workshop-card">
+            <img src="https://enablingempowerment.com/wp-content/uploads/2025/02/1738074050379.jpeg" class="card-img" alt="AI">
+            <div class="card-body">
+                <h3>AI Decision-Making Workshop</h3>
+                <p>Training on using AI tools for efficiency</p>
+            </div>
+        </div>
+
+        <div class="workshop-card">
+            <img src="https://cdn.prod.website-files.com/5f8b3f92189560cd389cf2b3/673ccc2f60187031f3da7edd_64a46519feb68da267faf0ed_leadership-team-building-activities-build-tower-challenge-teamland.com.jpeg" class="card-img" alt="Leadership">
+            <div class="card-body">
+                <h3>Leadership & Team Building</h3>
+                <p>Activities designed to improve team communication and project management</p>
+            </div>
+        </div>
+
+        <div class="workshop-card">
+            <img src="https://trainingindustry.com/content/uploads/2025/09/9.9.25-IT-and-Tech-Training-2167444878.jpg" class="card-img" alt="Cybersecurity">
+            <div class="card-body">
+                <h3>Cybersecurity Defense</h3>
+                <p>Simulations where participants identify and respond to potential cyber threats.</p>
+            </div>
+        </div>
+
+        <div class="workshop-card">
+            <img src="https://anandice.ac.in/wp-content/uploads/2025/01/mechanical-and-electrical-engineers-collaborate-in-robotics.png" class="card-img" alt="Robotics">
+            <div class="card-body">
+                <h3>Robotics & Engineering</h3>
+                <p>Hands-on projects engaging with robotics kits to improve logical reasoning.</p>
+            </div>
+        </div>
+
+        <div class="workshop-card">
+            <img src="https://www.szamalk-szalezi.hu/wp-content/uploads/2022/12/become-it-technician-1024x682-1.jpeg" class="card-img" alt="IT">
+            <div class="card-body">
+                <h3>IT Technician</h3>
+                <p>Installing software and conducting computer equipment testing.</p>
+            </div>
+        </div>
+
+        <div class="workshop-card">
+            <img src="https://miro.medium.com/v2/resize:fit:1400/1*TtLk_JHBi9djjedKctw-7Q.jpeg" class="card-img" alt="UXUI">
+            <div class="card-body">
+                <h3>UX/UI Design</h3>
+                <p>Sessions on prototyping and usability testing using tools like Figma.</p>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
