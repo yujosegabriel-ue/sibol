@@ -7,8 +7,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Orienta&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
 <style>
 .main-sidebar{
-    position: sticky;
-    top: 45px;
+    position: fixed;
+    top: 10px;
     margin-top: 40px;
     margin-left: 20px;
     width: 60px;
@@ -226,14 +226,12 @@ body {
 }
 .nav-item.active { background: var(--green); color: white; }
 
-/* ── MAIN ── */
-.main { margin-left: 300px; flex: 1; padding: 50px 60px; }
+.main { margin-left: 100px; flex: 1; padding: 50px 60px; }
 header h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; }
 
 .content-section { display: none; }
 .content-section.active { display: block; }
 
-/* ── COMPONENTS ── */
 .hero-banner {
   background: var(--green);
   border-radius: 35px;
@@ -337,30 +335,9 @@ header h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; }
         </div>
     </ul>
 </nav>
-<div class="layout">
-  <aside class="sidebar">
-    <div class="sidebar-profile">
-        <div class="logo-area">
-            <div class="logo-text">Si<span>bol</span></div>
-            <div class="logo-tagline">Grow · Learn · Work</div>
-        </div>
-        <div class="user-identity">
-            <div class="avatar-circle">G</div>
-            <div class="user-info">
-                <span class="name">Marie Catacutan</span>
-                <span class="meta">TVL Graduate · Bulacan</span>
-            </div>
-        </div>
-    </div>
 
-    <nav class="nav-menu">
-      <button class="nav-item active" onclick="switchSection('home', this)">🏠 Home</button>
-      <button class="nav-item" onclick="switchSection('growth', this)">🌱 My Growth</button>
-      <button class="nav-item" onclick="switchSection('workshops', this)">🎓 Workshops</button>
-      <button class="nav-item" onclick="switchSection('library', this)">📚 Skill Path Library</button>
-      <button class="nav-item" onclick="switchSection('messages', this)">💬 Messages</button>
-    </nav>
-  </aside>
+<div class="layout">
+  
 
   <main class="main">
     <div id="home" class="content-section active">
