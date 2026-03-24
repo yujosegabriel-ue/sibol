@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Messaging Inbox</title>
+  
+    <style>
+        .messaging {
+  display: flex;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: #0f2f23;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.logo {
+  margin-bottom: 20px;
+}
+
+.menu-item {
+  padding: 10px;
+  border-radius: 8px;
+  background: #1e5a3d;
+  margin-bottom: 15px;
+}
+
+.contacts {
+  flex: 1;
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.contact:hover {
+  background: rgba(255,255,255,0.1);
+}
+
+.contact.active {
+  background: rgba(255,255,255,0.2);
+}
+
+.contact h4 {
+  margin: 0;
+  font-size: 14px;
+}
+
+.chat-container h3 {
+  margin: 0;
+  font-size: 40px;
+}
+
+.contact p {
+  margin: 0;
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.chat-container p {
+  margin: 0;
+  font-size: 16px;
+  opacity: 0.7;
+}
+
+.chat-container {
+  flex: 1;
+  background: #86b48c;
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.chat-header {
+  background: #6faa78;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 15px;
+}
+
+.avatar {
+  width: 70px;
+  height: 70px;
+  background: #3c8d5b;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.avatar.small {
+  width: 40px;
+  height: 40px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
+
+.chat-body {
+  flex: 1;
+  padding: 20px;
+}
+
+.message {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.message.left {
+  justify-content: flex-start;
+}
+
+.message.right {
+  justify-content: flex-end;
+}
+
+.bubble {
+  background: #d9d9d9;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+
+.bubble.short {
+  width: 400px;
+  height: 40px;
+}
+
+.bubble.medium {
+  width: 180px;
+  height: 40px;
+}
+
+.bubble.long {
+  width: 300px;
+  height: 60px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  background: #d9d9d9;
+}
+
+.chat-input button {
+  margin-left: 10px;
+  border: none;
+  background: transparent;
+  font-size: 18px;
+  cursor: pointer;
+}
+    </style>
+
+</head>
+<body>
+
+<div class="messaging">
+
+  <div class="sidebar">
+    <div class="menu">
+      <div class="menu-item active">Messages</div>
+    </div>
+
+    <div class="contacts">
+      <div class="contact active">
+        <div class="avatar small">A</div>
+        <div>
+          <h4>Alyssa Tandoc</h4>
+          <p>JYP Manager - Pasig</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="avatar small">C</div>
+        <div>
+          <h4>Cyrus Catacutan</h4>
+          <p>Game Developer - Bulacan</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="avatar small">C</div>
+        <div>
+          <h4>Cai Yu</h4>
+          <p>Event Organizer - Zambales</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="avatar small">M</div>
+        <div>
+          <h4>Marla Gutierrez </h4>
+          <p>HR Manager - San Juan</p>
+        </div>
+      </div>
+
+      <div class="contact">
+        <div class="avatar small">P</div>
+        <div>
+          <h4>Paula Sangalang </h4>
+          <p>Restaurant Manager - Pasig</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="chat-container">
+
+    <div class="chat-header">
+      <div class="avatar"></div>
+      <div>
+        <h3>Alyssa Tandoc</h3>
+        <p>JYP Manager - Pasig</p>
+      </div>
+    </div>
+
+    <div class="chat-body">
+      <div class="message left">
+        <div class="avatar small"></div>
+        <div class="bubble short"></div>
+      </div>
+
+      <div class="message left">
+        <div class="avatar small"></div>
+        <div class="bubble medium"></div>
+      </div>
+
+      <div class="message right">
+        <div class="bubble long"></div>
+        <div class="avatar small"></div>
+      </div>
+    </div>
+
+    <div class="chat-input">
+      <input type="text" placeholder="Type a message...">
+      <button>&#9658;</button>
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
