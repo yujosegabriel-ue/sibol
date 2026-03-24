@@ -4,6 +4,151 @@
 <meta charset="UTF-8">
 <title>My Growth - Skill Path</title>
 <style>
+    .main-sidebar{
+        position: sticky;
+        top: 45px;
+        margin-top: 40px;
+        margin-left: 20px;
+        width: 60px;
+        height: 90vh;
+        float: left;
+        display: flex;
+        flex-direction: column;
+        background: linear-gradient(135deg, #0F2419, #1c3a2b);
+        border-radius: 15px;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+        transition: width 0.4s ease;
+        overflow: hidden;
+        z-index: 1000;
+    }
+
+    .main-sidebar:hover {
+        width: 220px;
+    }
+
+    .main-sidebar ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        width: 100%;
+    }
+
+    .main-sidebar li {
+        height: 60px;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        position: relative;
+    }
+
+    .main-sidebar a {
+        margin-left: 2px;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+        color: white;
+        height: 100%;
+        transition: background 0.3s;
+    }
+
+    .main-sidebar a:hover {
+        background: rgba(255,255,255,0.2);
+    }
+
+    .main-sidebar img {
+        width: 50px; 
+        height: 50px; 
+        margin-left: 3px;
+        object-fit: contain;
+        display: block;
+        border-radius: 10px;
+        flex-shrink: 0; 
+    }
+
+    .main-sidebar span {
+        opacity: 0;
+        white-space: nowrap;
+        transition: opacity 0.3s ease, margin-left 0.3s ease;
+        margin-left: 15px;
+    }
+
+    .main-sidebar:hover a span {
+        opacity: 1;
+        margin-left: 15px;
+    }
+
+    .sidebar-logo {
+        display: flex;
+        align-items: center; 
+        justify-content: flex-start; 
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        gap: 15px;
+        padding: 15px 6px;
+    }
+
+    .sidebar-logo img {
+        width: 42px;
+        height: 42px;
+        object-fit: cover;
+    }
+
+    .sidebar-logo h2 {
+        font-size: 16px;
+        color: #fff;
+        margin: 0;
+    }
+
+    .sidebar-logout {
+        margin-top: 300px;
+        padding: 20px 0px;
+    }
+
+    .sidebar-logout a {
+        display: flex;
+        align-items: center;
+        color: #fff;
+        text-decoration: none;
+    }
+
+    .sidebar-user {
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+        gap: 10px;
+        height: 80px; 
+        overflow: hidden;
+        text-decoration: none; 
+        transition: all 0.3s;
+        color: #fff; 
+    }
+
+    .sidebar-user:hover {
+        background: rgba(255,255,255,0.2); 
+    }
+
+    .sidebar-user .user-avatar {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+    }
+
+    .sidebar-user .user-info {
+        display: flex;
+        flex-direction: column;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .main-sidebar:hover .sidebar-user .user-info {
+        opacity: 1;
+    }
+
+    .user-name, .user-role {
+        color: #fff;
+        font-size: 14px;
+        line-height: 1.2;
+    }
+    
     body {
         margin: 0;
         font-family: "Segoe UI", sans-serif;
@@ -165,6 +310,64 @@
 </style>
 </head>
 <body>
+<nav class="main-sidebar">
+    <div class="sidebar-logo">
+        <img src="sidebar-icons/logo.png" alt="System Logo">
+        <h2>SIBOL</h2>
+    </div>
+
+    <a href="user-profile.html" class="sidebar-user">
+        <img src="sidebar-icons/profile.png" alt="User Profile" class="user-avatar">
+        <div class="user-info">
+            <span class="user-name">Gabriella Marie</span>
+            <span class="user-role">Student</span>
+        </div>
+    </a>
+
+    <ul>
+        <li>
+            <a href="index.html">
+                <img src="sidebar-icons/home.png" alt="">
+                <span>Home</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="growth.html">
+                <img src="sidebar-icons/skill-path.png" alt="">
+                <span>My Growth</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="workshop.html">
+                <img src="sidebar-icons/workshop.png" alt="">
+                <span>Workshops</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="skillpath.html">
+                <img src="sidebar-icons/library.png" alt="">
+                <span>Skill Path Library</span>
+            </a>
+        </li>
+
+        <li>
+            <a href="messages.html">
+                <img src="sidebar-icons/message.png" alt="">
+                <span>Messages</span>
+            </a>
+        </li>
+
+        <div class="sidebar-logout">
+            <a href="login.html">
+                <img src="sidebar-icons/logout.png" alt="">
+                <span>Logout</span>
+            </a>
+        </div>
+    </ul>
+</nav>
 
 <div class="container">
     <div class="header">
